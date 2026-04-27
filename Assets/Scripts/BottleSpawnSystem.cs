@@ -4,7 +4,7 @@ public class BottleSpawnSystem : MonoBehaviour
 {
     public LevelData levelData;
     public LevelTimeline timeline;
-
+    public Indicator indicator;
     public Bottle bottlePrefab;
     public Lane[] lanes;
 
@@ -38,6 +38,7 @@ public class BottleSpawnSystem : MonoBehaviour
     {
         Lane lane = lanes[note.lane];
         Bottle bottle = Instantiate(bottlePrefab, lane.spawnPoint.position, Quaternion.identity);
-        bottle.Init(note.time - startTimeOffset, note.time, note.time + endTimeOffset, lane, timeline);
+        bottle.Init(note.time - startTimeOffset, note.time, note.time + endTimeOffset, lane, indicator, timeline);
+        lane.AddBottle(bottle);
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
 
@@ -6,6 +7,35 @@ public class Lane : MonoBehaviour
     public Transform spawnPoint;
     public Transform hitPoint;
     public Transform endPoint;
+
+    private Queue<Bottle> bottles = new Queue<Bottle>();
+
+    public void AddBottle(Bottle bottle)
+    {
+        bottles.Enqueue(bottle);
+    }
+
+    public void RemoveBottle(Bottle bottle)
+    {
+        if(bottles.Count > 0 && bottles.Peek() == bottle)
+        {
+            bottles.Dequeue();
+            Destroy(bottle.gameObject);
+        }
+    }
+
+    public Bottle Peek()
+    {
+        return bottles.Count > 0 ? bottles.Peek() : null;
+    }
+
+    public bool Hit(float hitWindow)
+    {
+        if(bottles.Count == 0) return false;
+        Bottle bottle = bottles.Peek();
+        if(bottle == null) return false;
+        return bottle.Hit(hitWindow);
+    }
 
     public Vector3 GetPosition(float progress)
     {

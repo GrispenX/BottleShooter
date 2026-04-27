@@ -1,33 +1,49 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.iOS;
 
 public class Bottle : MonoBehaviour
 {
-    private float startTime;
-    private float hitTime;
-    private float endTime;
-    private Lane lane;
+    public float StartTime { get; private set; }
+    public float HitTime { get; private set; }
+    public float EndTime { get; private set; }
+    public Lane Lane { get; private set; }
+    public Indicator Indicator { get; private set; }
     private LevelTimeline timeline;
 
-    public void Init(float startTime, float hitTime, float endTime, Lane lane, LevelTimeline timeline)
+    public void Init(float startTime, float hitTime, float endTime, Lane lane, Indicator indicator, LevelTimeline timeline)
     {
-        this.startTime = startTime;
-        this.hitTime = hitTime;
-        this.endTime = endTime;
-        this.lane = lane;
+        StartTime = startTime;
+        HitTime = hitTime;
+        EndTime = endTime;
+        Lane = lane;
+        Indicator = indicator;
         this.timeline = timeline;
     }
 
     void Update()
     {
-        float progress = (timeline.CurrentTime - startTime) / (endTime - startTime);
+        float progress = (timeline.CurrentTime - StartTime) / (EndTime - StartTime);
 
-        transform.position = lane.GetPosition(progress);
+        transform.position = Lane.GetPosition(progress);
 
         if(progress > 1.0f)
         {
-            Debug.Log($"{startTime} {hitTime} {endTime} {timeline.CurrentTime} {progress} Destroying");
-            Destroy(gameObject);
+            Indicator.SetColor(Color.red);
+            Lane.RemoveBottle(this);
         }
+    }
+
+    public bool Hit(float hitWindow)
+    {
+        float error = Mathf.Abs(timeline.CurrentTime - HitTime);
+        if(error <= hitWindow)
+        {
+            Debug.Log("Bottle destroyed");
+            Indicator.SetColor(Color.green);
+            Lane.RemoveBottle(this);
+            return true;
+        }
+        return false;
     }
 }
