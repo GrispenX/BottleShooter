@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class HitSystem : MonoBehaviour
 {
-    public List<Lane> lanes;
-
     void OnEnable()
     {
         PlayerInput.OnShoot += HandleShoot;
@@ -17,7 +15,6 @@ public class HitSystem : MonoBehaviour
 
     void HandleShoot(int laneIndex)
     {
-        Lane lane = lanes[laneIndex];
-        lane.Hit();
+        GameManager.instance.lanes[laneIndex].Hit();
     }
 }

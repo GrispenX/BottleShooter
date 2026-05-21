@@ -19,14 +19,11 @@ public class BottleSpawnSystem : MonoBehaviour
 {
     public LevelData levelData;
     private List<SimplifiedLaneData> simplifiedLanes;
-    public List<Lane> lanes;
-    public LevelTimeline timeline;
     public DefaultBottle defaultBottlePrefab;
     public FatBottle fatBottlePrefab;
 
     void Start()
     {
-        timeline.ResetTime();
         simplifiedLanes = new List<SimplifiedLaneData>();
         for(int lane_idx = 0; lane_idx < levelData.lanes.Count; lane_idx++)
         {
@@ -61,10 +58,10 @@ public class BottleSpawnSystem : MonoBehaviour
         for(int lane_idx = 0; lane_idx < simplifiedLanes.Count; lane_idx++)
         {
             SimplifiedLaneData lane_data = simplifiedLanes[lane_idx];
-            while(lane_data.bottles.Count > 0 && lane_data.bottles.Peek().spawnTime <= timeline.CurrentTime)
+            while(lane_data.bottles.Count > 0 && lane_data.bottles.Peek().spawnTime <= GameManager.instance.timeline.CurrentTime)
             {
                 SimplifiedBottleData bottle_data = lane_data.bottles.Dequeue();
-                Lane lane = lanes[lane_idx];
+                Lane lane = GameManager.instance.lanes[lane_idx];
                 BaseBottle bottle = bottle_data.bottleType switch
                 {
                     BottleType.Default => Instantiate(defaultBottlePrefab, lane.spawnPoint.position, Quaternion.identity),

@@ -7,8 +7,8 @@ public class Lane : MonoBehaviour
     public Transform spawnPoint;
     public Transform hitPoint;
     public Transform endPoint;
+    [Range(1.0f, 3.0f)]
     public float travelTime = 2.0f;
-    public LevelTimeline timeline;
     private Queue<BaseBottle> bottles = new Queue<BaseBottle>();
 
     public void AddBottle(BaseBottle bottle)
@@ -22,7 +22,7 @@ public class Lane : MonoBehaviour
         BaseBottle bottle = bottles.Peek();
         float hit_point_ratio = Vector3.Distance(spawnPoint.position, hitPoint.position) / Vector3.Distance(spawnPoint.position, endPoint.position);
         float perfect_hit_time = bottle.StartTime + travelTime * hit_point_ratio;
-        float error = Math.Abs(perfect_hit_time - timeline.CurrentTime);
+        float error = Math.Abs(perfect_hit_time - GameManager.instance.timeline.CurrentTime);
         float hit_window = (1.0f - hit_point_ratio) * travelTime;
         if(error <= hit_window)
         {
@@ -46,13 +46,10 @@ public class Lane : MonoBehaviour
         if(bottles.Count == 0) return;
         foreach(BaseBottle bottle in bottles)
         {
-            float a = bottle.StartTime;
-            a = timeline.CurrentTime;
-            a = travelTime;
-            float progress = (timeline.CurrentTime - bottle.StartTime) / travelTime;
+            float progress = (GameManager.instance.timeline.CurrentTime - bottle.StartTime) / travelTime;
             bottle.transform.position = Vector3.Lerp(spawnPoint.position, endPoint.position, progress);
         }
-        if(bottles.Peek().StartTime + travelTime <= timeline.CurrentTime)
+        if(bottles.Peek().StartTime + travelTime <= GameManager.instance.timeline.CurrentTime)
         {
             BaseBottle bottle = bottles.Dequeue();
             bottle.End();
