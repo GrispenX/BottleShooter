@@ -48,16 +48,17 @@
     <Analyzer Include="/home/grispenx/Unity/Hub/Editor/6000.0.60f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/Scripts/Note.cs" />
+    <Compile Include="Assets/Scripts/BaseBottle.cs" />
     <Compile Include="Assets/Scripts/PlayerInput.cs" />
+    <Compile Include="Assets/Scripts/DefaultBottle.cs" />
     <Compile Include="Assets/Scripts/Lane.cs" />
     <Compile Include="Assets/Scripts/Indicator.cs" />
-    <Compile Include="Assets/Scripts/Bottle.cs" />
     <Compile Include="Assets/Scripts/LevelTimeline.cs" />
     <Compile Include="Assets/TutorialInfo/Scripts/Readme.cs" />
     <Compile Include="Assets/Scripts/HitSystem.cs" />
     <Compile Include="Assets/Scripts/LevelData.cs" />
     <Compile Include="Assets/Scripts/BottleSpawnSystem.cs" />
+    <Compile Include="Assets/Scripts/FatBottle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

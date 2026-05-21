@@ -154,6 +154,8 @@ MonoBehaviour:
   spawnPoint: {fileID: 366818298}
   hitPoint: {fileID: 1168788109}
   endPoint: {fileID: 1993357590}
+  travelTime: 2
+  timeline: {fileID: 1740231038}
 --- !u!4 &250655858
 Transform:
   m_ObjectHideFlags: 0
@@ -289,6 +291,8 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585549}
+  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -414,6 +418,34 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &330585548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4104af0d71f8f69ceabc0ce70688c2f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560a3b387aee91cceab1f6d0f033434f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lanes:
+  - {fileID: 1981401350}
+  - {fileID: 250655857}
+  - {fileID: 421094390}
 --- !u!1 &366818297
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,6 +633,8 @@ MonoBehaviour:
   spawnPoint: {fileID: 1696845420}
   hitPoint: {fileID: 1805084183}
   endPoint: {fileID: 1194237160}
+  travelTime: 2
+  timeline: {fileID: 1740231038}
 --- !u!4 &421094391
 Transform:
   m_ObjectHideFlags: 0
@@ -816,13 +850,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelData: {fileID: 11400000, guid: baf00f8f395bc69699024568d437c368, type: 2}
-  timeline: {fileID: 1740231038}
-  bottlePrefab: {fileID: 125597534000430362, guid: b6e1d80dbf0710dcebfdb270d7a52a79, type: 3}
   lanes:
   - {fileID: 1981401350}
   - {fileID: 250655857}
   - {fileID: 421094390}
-  travelTime: 2
+  timeline: {fileID: 1740231038}
+  defaultBottlePrefab: {fileID: 9022216127451523742, guid: 39f2149a188ac7f99bf631fbb003cee6, type: 3}
+  fatBottlePrefab: {fileID: 1475165222084850458, guid: f41737620f7c34d6d8c94deb841c38dd, type: 3}
 --- !u!4 &1205260618
 Transform:
   m_ObjectHideFlags: 0
@@ -1010,6 +1044,8 @@ MonoBehaviour:
   spawnPoint: {fileID: 939410013}
   hitPoint: {fileID: 273773822}
   endPoint: {fileID: 1853286336}
+  travelTime: 2
+  timeline: {fileID: 1740231038}
 --- !u!4 &1981401351
 Transform:
   m_ObjectHideFlags: 0

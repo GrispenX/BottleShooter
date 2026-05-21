@@ -1,11 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class HitSystem : MonoBehaviour
 {
-    public LevelTimeline timeline;
-    public Lane[] lanes;
-    public float hitWindow = 1f;
+    public List<Lane> lanes;
 
     void OnEnable()
     {
@@ -20,6 +18,6 @@ public class HitSystem : MonoBehaviour
     void HandleShoot(int laneIndex)
     {
         Lane lane = lanes[laneIndex];
-        lane.Hit(hitWindow);
+        lane.Hit();
     }
 }
