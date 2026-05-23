@@ -1,43 +1,85 @@
+using System;
+using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
+
+internal class SimplifiedBottleData
+{
+    public float spawnTime;
+    public BottleType bottleType;
+}
+
+internal class SimplifiedLaneData
+{
+    public Queue<SimplifiedBottleData> bottles = new Queue<SimplifiedBottleData>();
+}
 
 public class BottleSpawnSystem : MonoBehaviour
 {
     public LevelData levelData;
-    public LevelTimeline timeline;
+    private List<SimplifiedLaneData> simplifiedLanes;
+    public DefaultBottle defaultBottlePrefab;
+    public FatBottle fatBottlePrefab;
+    public AcidBottle acidBottlePrefab;
+    public HealBottle healBottlePrefab;
 
-    public Bottle bottlePrefab;
-    public Lane[] lanes;
-
-    public float travelTime = 2f;
-    private int index = 0;
-    private float startTimeOffset;
-    private float endTimeOffset;
+    public void Reset()
+    {
+        simplifiedLanes = new List<SimplifiedLaneData>();
+        for(int lane_idx = 0; lane_idx < levelData.lanes.Count; lane_idx++)
+        {
+            SimplifiedLaneData simplified_lane_data = new SimplifiedLaneData();
+            float spawn_time = 0;
+            LaneData lane_data = levelData.lanes[lane_idx];
+            for(int wave_idx = 0; wave_idx < lane_data.waves.Count; wave_idx++)
+            {
+                WaveData wave_data = lane_data.waves[wave_idx];
+                spawn_time += wave_data.delay;
+                for(int group_idx = 0; group_idx < wave_data.groups.Count; group_idx++)
+                {
+                    GroupData group_data = wave_data.groups[group_idx];
+                    spawn_time += group_data.delay;
+                    for(int bottle_idx = 0; bottle_idx < group_data.bottles.Count; bottle_idx++)
+                    {
+                        SimplifiedBottleData simplified_bottle_data = new SimplifiedBottleData();
+                        BottleData bottle_data = group_data.bottles[bottle_idx];
+                        spawn_time += bottle_data.delay;
+                        simplified_bottle_data.spawnTime = spawn_time;
+                        simplified_bottle_data.bottleType = bottle_data.bottleType;
+                        simplified_lane_data.bottles.Enqueue(simplified_bottle_data);
+                    }
+                }
+            }
+            simplifiedLanes.Add(simplified_lane_data);
+        }
+    }
 
     void Start()
     {
-        index = 0;
-        timeline.ResetTime();
-        Lane lane = lanes[0];
-        Vector3 start = lane.spawnPoint.position;
-        Vector3 hit = lane.hitPoint.position;
-        Vector3 end = lane.endPoint.position;
-        startTimeOffset = Vector3.Distance(start, hit) / Vector3.Distance(start, end) * travelTime;
-        endTimeOffset = Vector3.Distance(hit, end) / Vector3.Distance(start, end) * travelTime;
+        Reset();
     }
 
     void Update()
     {
-        while (index < levelData.notes.Count && levelData.notes[index].time <= timeline.CurrentTime + startTimeOffset)
+        for(int lane_idx = 0; lane_idx < simplifiedLanes.Count; lane_idx++)
         {
-            Spawn(levelData.notes[index]);
-            index++;
+            SimplifiedLaneData lane_data = simplifiedLanes[lane_idx];
+            while(lane_data.bottles.Count > 0 && lane_data.bottles.Peek().spawnTime <= GameManager.instance.timeline.CurrentTime)
+            {
+                SimplifiedBottleData bottle_data = lane_data.bottles.Dequeue();
+                Lane lane = GameManager.instance.lanes[lane_idx];
+                BaseBottle bottle = bottle_data.bottleType switch
+                {
+                    BottleType.Default => Instantiate(defaultBottlePrefab, lane.spawnPoint.position, Quaternion.identity),
+                    BottleType.Fat     => Instantiate(fatBottlePrefab, lane.spawnPoint.position, Quaternion.identity),
+                    BottleType.Acid    => Instantiate(acidBottlePrefab, lane.spawnPoint.position, Quaternion.identity),
+                    BottleType.Heal    => Instantiate(healBottlePrefab, lane.spawnPoint.position, Quaternion.identity),
+                    _                  => throw new Exception("Fuck it")
+                };
+                bottle.Init(bottle_data.spawnTime);
+                lane.AddBottle(bottle);
+            }
         }
-    }
-
-    void Spawn(Note note)
-    {
-        Lane lane = lanes[note.lane];
-        Bottle bottle = Instantiate(bottlePrefab, lane.spawnPoint.position, Quaternion.identity);
-        bottle.Init(note.time - startTimeOffset, note.time, note.time + endTimeOffset, lane, timeline);
     }
 }

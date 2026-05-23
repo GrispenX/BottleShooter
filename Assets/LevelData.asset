@@ -12,20 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec7e997a1072581f8a70e84f143574ee, type: 3}
   m_Name: LevelData
   m_EditorClassIdentifier: 
-  notes:
-  - time: 1
-    lane: 1
-  - time: 2
-    lane: 2
-  - time: 3
-    lane: 0
-  - time: 5
-    lane: 0
-  - time: 5
-    lane: 1
-  - time: 5
-    lane: 2
-  - time: 7
-    lane: 1
-  - time: 7.2
-    lane: 1
+  lanes:
+  - waves:
+    - delay: 0
+      groups:
+      - delay: 0
+        bottles:
+        - delay: 1
+          bottleType: 0
+        - delay: 1
+          bottleType: 1
+        - delay: 1
+          bottleType: 1
+        - delay: 1
+          bottleType: 1
+  - waves: []
+  - waves: []
