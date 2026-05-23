@@ -21,6 +21,8 @@ public class BottleSpawnSystem : MonoBehaviour
     private List<SimplifiedLaneData> simplifiedLanes;
     public DefaultBottle defaultBottlePrefab;
     public FatBottle fatBottlePrefab;
+    public AcidBottle acidBottlePrefab;
+    public HealBottle healBottlePrefab;
 
     public void Reset()
     {
@@ -71,6 +73,8 @@ public class BottleSpawnSystem : MonoBehaviour
                 {
                     BottleType.Default => Instantiate(defaultBottlePrefab, lane.spawnPoint.position, Quaternion.identity),
                     BottleType.Fat     => Instantiate(fatBottlePrefab, lane.spawnPoint.position, Quaternion.identity),
+                    BottleType.Acid    => Instantiate(acidBottlePrefab, lane.spawnPoint.position, Quaternion.identity),
+                    BottleType.Heal    => Instantiate(healBottlePrefab, lane.spawnPoint.position, Quaternion.identity),
                     _                  => throw new Exception("Fuck it")
                 };
                 bottle.Init(bottle_data.spawnTime);

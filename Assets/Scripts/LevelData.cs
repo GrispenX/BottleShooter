@@ -5,7 +5,9 @@ using UnityEngine;
 public enum BottleType
 {
     Default,
-    Fat
+    Fat,
+    Acid,
+    Heal
 }
 
 [Serializable]
