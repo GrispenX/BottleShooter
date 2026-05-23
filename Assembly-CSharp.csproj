@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Assets/Scripts/BaseBottle.cs" />
     <Compile Include="Assets/Scripts/PlayerInput.cs" />
+    <Compile Include="Assets/Scripts/HealthCounter.cs" />
     <Compile Include="Assets/Scripts/DefaultBottle.cs" />
     <Compile Include="Assets/Scripts/Lane.cs" />
     <Compile Include="Assets/Scripts/LevelTimeline.cs" />

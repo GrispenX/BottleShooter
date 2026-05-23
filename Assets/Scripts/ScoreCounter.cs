@@ -10,8 +10,14 @@ public class ScoreCounter : MonoBehaviour
         Combo = 0;
     }
 
+    public void ResetScore()
+    {
+        Score = 0;
+    }
+
     public void AddScore(float bottle_base, float accuracy)
     {
-        
+        Score += bottle_base;
+        Combo += 1;
     }
 }

@@ -24,5 +24,7 @@ MonoBehaviour:
           bottleType: 1
         - delay: 1
           bottleType: 1
+        - delay: 1
+          bottleType: 1
   - waves: []
   - waves: []

@@ -22,7 +22,7 @@ public class BottleSpawnSystem : MonoBehaviour
     public DefaultBottle defaultBottlePrefab;
     public FatBottle fatBottlePrefab;
 
-    void Start()
+    public void Reset()
     {
         simplifiedLanes = new List<SimplifiedLaneData>();
         for(int lane_idx = 0; lane_idx < levelData.lanes.Count; lane_idx++)
@@ -51,6 +51,11 @@ public class BottleSpawnSystem : MonoBehaviour
             }
             simplifiedLanes.Add(simplified_lane_data);
         }
+    }
+
+    void Start()
+    {
+        Reset();
     }
 
     void Update()

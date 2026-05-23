@@ -7,13 +7,20 @@ public class Lane : MonoBehaviour
     public Transform spawnPoint;
     public Transform hitPoint;
     public Transform endPoint;
-    [Range(1.0f, 3.0f)]
-    public float travelTime = 2.0f;
+    [Range(1.0f, 3.0f)] public float travelTime = 2.0f;
     private Queue<BaseBottle> bottles = new Queue<BaseBottle>();
 
     public void AddBottle(BaseBottle bottle)
     {
         bottles.Enqueue(bottle);
+    }
+
+    public void ClearBottles()
+    {
+        while(bottles.Count >= 1)
+        {
+            Destroy(bottles.Dequeue().gameObject);
+        }
     }
 
     public void Hit()
@@ -26,18 +33,13 @@ public class Lane : MonoBehaviour
         float hit_window = (1.0f - hit_point_ratio) * travelTime;
         if(error <= hit_window)
         {
-            if(bottle.Hit())
+            float accuracy = 1.0f - (error / hit_window);
+            if(bottle.Hit(accuracy))
             {
-                bottles.Dequeue();
+                bottle = bottles.Dequeue();
                 Destroy(bottle.gameObject);
-            }   
+            }
         }
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame

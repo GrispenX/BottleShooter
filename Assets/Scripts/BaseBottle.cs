@@ -9,7 +9,7 @@ public abstract class BaseBottle : MonoBehaviour
         StartTime = startTime;
     }
 
-    public abstract bool Hit();
+    public abstract bool Hit(float accuracy);
 
     public abstract void End();
 }

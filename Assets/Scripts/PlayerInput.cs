@@ -9,20 +9,22 @@ public class PlayerInput : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log("Q Pressed");
             OnShoot?.Invoke(0);
         }
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            Debug.Log("W Pressed");
             OnShoot?.Invoke(1);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("E Pressed");
             OnShoot?.Invoke(2);
+        }
+
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            GameManager.instance.RestartGame();
         }
     }
 }

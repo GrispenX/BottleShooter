@@ -5,7 +5,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public ScoreCounter scoreCounter;
+    public HealthCounter healthCounter;
     public LevelTimeline timeline;
+    public BottleSpawnSystem bottleSpawner;
     public List<Lane> lanes;
 
     void Awake()
@@ -18,5 +20,18 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void RestartGame()
+    {
+        timeline.ResetTime();
+        scoreCounter.ResetCombo();
+        scoreCounter.ResetScore();
+        healthCounter.Reset();
+        foreach(Lane lane in lanes)
+        {
+            lane.ClearBottles();
+        }
+        bottleSpawner.Reset();
     }
 }
