@@ -158,7 +158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c84434d1bc49d34fa1bcaf3d555cba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
 --- !u!1 &248288938
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,8 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f80d4edc6f8015a4283e009f948df1f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pistol_2: {fileID: 1815463283}
   pistol_1: {fileID: 221484314}
+  pistol_2: {fileID: 1815463283}
 --- !u!4 &248288940
 Transform:
   m_ObjectHideFlags: 0
