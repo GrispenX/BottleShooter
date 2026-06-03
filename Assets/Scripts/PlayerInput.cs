@@ -22,19 +22,14 @@ public class PlayerInput : MonoBehaviour
             OnShoot?.Invoke(2);
         }
 
-        if(Input.GetKeyDown(KeyCode.P))
+        if(Input.GetKeyDown(KeyCode.R))
         {
-            GameManager.instance.RestartGame();
+            GameManager.instance.RestartLevel();
         }
 
-        if(Input.GetKeyDown(KeyCode.K))
+        if(Input.GetKeyDown(KeyCode.Escape))
         {
-            GameManager.instance.musicController.PauseMusic();
-        }
-
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            GameManager.instance.musicController.UnpauseMusic();
+            GameManager.instance.SwitchPause();
         }
     }
 }

@@ -21,6 +21,6 @@ public class HealthCounter : MonoBehaviour
     {
         if(amount <= 0) return;
         Health = Math.Max(Health - amount, 0);
-        if(Health == 0) GameManager.instance.RestartGame();
+        if(Health == 0) GameManager.instance.RestartLevel();
     }
 }

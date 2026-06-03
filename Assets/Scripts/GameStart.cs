@@ -3,10 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class GameStart : MonoBehaviour
 {
-    [Header("UI Панелі")]
     public GameObject mainMenuPanel;    
     public GameObject levelSelectPanel;  
     public GameObject settingsPanel;    
+
+    private LevelData levelData;
 
     private void Start()
     {
@@ -15,7 +16,6 @@ public class GameStart : MonoBehaviour
         if (levelSelectPanel != null) levelSelectPanel.SetActive(false);
         if (settingsPanel != null) settingsPanel.SetActive(false);
     }
-
 
     public void OpenLevelSelect()
     {
@@ -29,14 +29,19 @@ public class GameStart : MonoBehaviour
         if (levelSelectPanel != null) levelSelectPanel.SetActive(false);
     }
 
-
-    public void LoadScene(string sceneName)
+    public void LoadGame(LevelData level)
     {
-        Debug.Log($"Loading scene: {sceneName}");
-        SceneManager.LoadScene(sceneName);
+        levelData = level;
+        SceneManager.sceneLoaded += OnGameLoaded;
+        SceneManager.LoadScene("Game");
     }
 
-
+    private void OnGameLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SceneManager.sceneLoaded -= OnGameLoaded;
+        GameManager.instance.levelData = levelData;
+        GameManager.instance.RestartLevel(); 
+    }
 
     public void OpenSettings()
     {
