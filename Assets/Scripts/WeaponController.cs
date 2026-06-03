@@ -4,9 +4,12 @@ public class WeaponController : MonoBehaviour
 {
     [Header("Аніматори пістолетів")]
     public Animator pistol_1; 
-    public Animator pistol_2; 
+    public Animator pistol_2;
+    [Header("Звуки пістолетів")]
+    public AudioSource pistol1_Sound; 
+    public AudioSource pistol2_Sound;
 
-  
+
     private bool isLeftTurn = true;
 
     private void OnEnable()
@@ -27,10 +30,12 @@ public class WeaponController : MonoBehaviour
             if (isLeftTurn)
             {
                 if (pistol_1 != null) pistol_1.Play("Pistol1_anim", 0, 0f);
+                if (pistol1_Sound != null) pistol1_Sound.Play();
             }
             else
             {
                 if (pistol_2 != null) pistol_2.Play("Pistol2_anim", 0, 0f);
+                if (pistol1_Sound != null) pistol2_Sound.Play();
             }
             
 
