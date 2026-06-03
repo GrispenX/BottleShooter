@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    [Header("¿Ì≥Ï‡ÚÓË Ô≥ÒÚÓÎÂÚ≥‚")]
-    public Animator pistol_2;
-    public Animator pistol_1;
+    [Header("–ê–Ω—ñ–º–∞—Ç–æ—Ä–∏ –ø—ñ—Å—Ç–æ–ª–µ—Ç—ñ–≤")]
+    public Animator pistol_1; 
+    public Animator pistol_2; 
+
+  
+    private bool isLeftTurn = true;
 
     private void OnEnable()
     {
@@ -13,27 +16,26 @@ public class WeaponController : MonoBehaviour
 
     private void OnDisable()
     {
-
         PlayerInput.OnShoot -= HandleShoot;
     }
 
     private void HandleShoot(int laneIndex)
     {
-        switch (laneIndex)
+
+        if (laneIndex == 0 || laneIndex == 2 || laneIndex == 1)
         {
-            case 0: 
-                if (pistol_2 != null) pistol_2.SetTrigger("Shoot");
-                break;
+            if (isLeftTurn)
+            {
+                if (pistol_1 != null) pistol_1.Play("Pistol1_anim", 0, 0f);
+            }
+            else
+            {
+                if (pistol_2 != null) pistol_2.Play("Pistol2_anim", 0, 0f);
+            }
+            
 
-            case 1: 
-
-                if (pistol_2 != null) pistol_2.SetTrigger("Shoot");
-                if (pistol_1 != null) pistol_1.SetTrigger("Shoot");
-                break;
-
-            case 2:
-                if (pistol_1 != null) pistol_1.SetTrigger("Shoot");
-                break;
+            isLeftTurn = !isLeftTurn;
         }
+
     }
 }
