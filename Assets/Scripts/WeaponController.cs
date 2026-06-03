@@ -2,11 +2,9 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    [Header("Аніматори пістолетів")]
     public Animator pistol_1; 
     public Animator pistol_2; 
 
-  
     private bool isLeftTurn = true;
 
     private void OnEnable()
@@ -21,7 +19,6 @@ public class WeaponController : MonoBehaviour
 
     private void HandleShoot(int laneIndex)
     {
-
         if (laneIndex == 0 || laneIndex == 2 || laneIndex == 1)
         {
             if (isLeftTurn)
@@ -36,6 +33,5 @@ public class WeaponController : MonoBehaviour
 
             isLeftTurn = !isLeftTurn;
         }
-
     }
 }
