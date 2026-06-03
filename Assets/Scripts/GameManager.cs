@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public ScoreCounter scoreCounter;
     public HealthCounter healthCounter;
-    public LevelTimeline timeline;
+    public LevelMusicController musicController;
     public BottleSpawnSystem bottleSpawner;
     public List<Lane> lanes;
 
@@ -24,7 +24,8 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        timeline.ResetTime();
+        musicController.StopMusic();
+        musicController.StartMusic();
         scoreCounter.ResetCombo();
         scoreCounter.ResetScore();
         healthCounter.Reset();

@@ -29,7 +29,7 @@ public class Lane : MonoBehaviour
         BaseBottle bottle = bottles.Peek();
         float hit_point_ratio = Vector3.Distance(spawnPoint.position, hitPoint.position) / Vector3.Distance(spawnPoint.position, endPoint.position);
         float perfect_hit_time = bottle.StartTime + travelTime * hit_point_ratio;
-        float error = Math.Abs(perfect_hit_time - GameManager.instance.timeline.CurrentTime);
+        float error = Math.Abs(perfect_hit_time - (float)GameManager.instance.musicController.CurrentTime);
         float hit_window = (1.0f - hit_point_ratio) * travelTime;
         if(error <= hit_window)
         {
@@ -48,10 +48,10 @@ public class Lane : MonoBehaviour
         if(bottles.Count == 0) return;
         foreach(BaseBottle bottle in bottles)
         {
-            float progress = (GameManager.instance.timeline.CurrentTime - bottle.StartTime) / travelTime;
+            float progress = ((float)GameManager.instance.musicController.CurrentTime - bottle.StartTime) / travelTime;
             bottle.transform.position = Vector3.Lerp(spawnPoint.position, endPoint.position, progress);
         }
-        if(bottles.Peek().StartTime + travelTime <= GameManager.instance.timeline.CurrentTime)
+        if(bottles.Peek().StartTime + travelTime <= GameManager.instance.musicController.CurrentTime)
         {
             BaseBottle bottle = bottles.Dequeue();
             bottle.End();
