@@ -6,9 +6,4 @@ public class MenuController : MonoBehaviour
     {
         AudioListener.volume = volume;
     }
-
-    public void ToggleFullscreen()
-    {
-        Screen.fullScreen = !Screen.fullScreen;
-    }
 }
