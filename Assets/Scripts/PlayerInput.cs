@@ -26,5 +26,15 @@ public class PlayerInput : MonoBehaviour
         {
             GameManager.instance.RestartGame();
         }
+
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            GameManager.instance.musicController.PauseMusic();
+        }
+
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            GameManager.instance.musicController.UnpauseMusic();
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,21 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void Pause()
+    {
+        musicController.PauseMusic();
+    }
+
+    public void Unpause()
+    {
+        musicController.UnpauseMusic();
+    }
+
+    void Start()
+    {
+        RestartGame();
     }
 
     public void RestartGame()
