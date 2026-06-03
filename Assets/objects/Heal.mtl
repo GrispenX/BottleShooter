@@ -1,0 +1,14 @@
+# Blender 5.1.2 MTL File: 'Untitled.blend'
+# www.blender.org
+
+newmtl 22_-_Default
+Ka 1.000000 1.000000 1.000000
+Ks 0.226586 0.226586 0.226586
+Ke 0.000000 0.000000 0.000000
+Ni 2.250000
+d 1.000000
+illum 3
+map_Kd C:/case_albedo.png
+map_Ns C:/case_roughness.png
+map_refl C:/case_metalness.png
+map_Bump -bm 1.000000 C:/case_normal.png
