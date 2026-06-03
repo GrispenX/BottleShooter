@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         healthText.text = GameManager.instance.healthCounter.Health.ToString() + " HP";
-        timeText.text = GameManager.instance.timeline.CurrentTime.ToString("#.## s");
+        timeText.text = GameManager.instance.musicController.CurrentTime.ToString("#.## s");
         scoreText.text = Math.Round(GameManager.instance.scoreCounter.Score).ToString() + " pts";
     }
 }

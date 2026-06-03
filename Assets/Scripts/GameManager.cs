@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public ScoreCounter scoreCounter;
     public HealthCounter healthCounter;
-    public LevelTimeline timeline;
+    public LevelMusicController musicController;
     public BottleSpawnSystem bottleSpawner;
     public List<Lane> lanes;
 
@@ -22,9 +23,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void Pause()
+    {
+        musicController.PauseMusic();
+    }
+
+    public void Unpause()
+    {
+        musicController.UnpauseMusic();
+    }
+
+    void Start()
+    {
+        RestartGame();
+    }
+
     public void RestartGame()
     {
-        timeline.ResetTime();
+        musicController.StopMusic();
+        musicController.StartMusic();
         scoreCounter.ResetCombo();
         scoreCounter.ResetScore();
         healthCounter.Reset();

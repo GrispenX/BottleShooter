@@ -65,7 +65,7 @@ public class BottleSpawnSystem : MonoBehaviour
         for(int lane_idx = 0; lane_idx < simplifiedLanes.Count; lane_idx++)
         {
             SimplifiedLaneData lane_data = simplifiedLanes[lane_idx];
-            while(lane_data.bottles.Count > 0 && lane_data.bottles.Peek().spawnTime <= GameManager.instance.timeline.CurrentTime)
+            while(lane_data.bottles.Count > 0 && lane_data.bottles.Peek().spawnTime <= GameManager.instance.musicController.CurrentTime)
             {
                 SimplifiedBottleData bottle_data = lane_data.bottles.Dequeue();
                 Lane lane = GameManager.instance.lanes[lane_idx];
