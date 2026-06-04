@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public List<Lane> lanes;
 
     public GameObject pauseMenuOverlay;
+    public GameObject gameOverOverlay;
 
     public bool IsPaused { get; private set; }
 
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartLevel()
     {
+        gameOverOverlay.SetActive(false);
         musicController.StopMusic();
         musicController.StartMusic();
         scoreCounter.ResetCombo();
@@ -43,9 +45,16 @@ public class GameManager : MonoBehaviour
         }
         bottleSpawner.levelData = levelData;
         bottleSpawner.Reset();
+        musicController.audioClip = levelData.audioClip;
     }
 
     public void EndLevel()
+    {
+        musicController.StopMusic();
+        gameOverOverlay.SetActive(true);
+    }
+
+    public void LeaveLevel()
     {
         SceneManager.LoadScene("MainMenu");
     }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ScoreCounter : MonoBehaviour
@@ -17,7 +18,7 @@ public class ScoreCounter : MonoBehaviour
 
     public void AddScore(float bottle_base, float accuracy)
     {
-        Score += bottle_base;
+        Score += bottle_base + 0.1f * bottle_base * Math.Min(Combo, 10);
         Combo += 1;
     }
 }

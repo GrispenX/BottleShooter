@@ -11,7 +11,7 @@ enum MusicState
 public class LevelMusicController : MonoBehaviour
 {
     [SerializeField] private AudioSource musicSource;
-    [SerializeField] private AudioClip audioClip;
+    [SerializeField] public AudioClip audioClip;
 
     private double startDspTime = 0;
     private double pauseDspTime;

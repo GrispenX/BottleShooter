@@ -41,4 +41,5 @@ public class LaneData
 public class LevelData : ScriptableObject
 {
     public List<LaneData> lanes;
+    public AudioClip audioClip;
 }
